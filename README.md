@@ -54,9 +54,9 @@ the values that you need.
 ## Running the Application 
 From your repo directory:
 
-	rake db:create
-	rake db:migrate
-  rake db:seed
+    rake db:create
+    rake db:migrate
+    rake db:seed
 
 Finally, you can start your rails app using Foreman (which reads .env)
 using:
