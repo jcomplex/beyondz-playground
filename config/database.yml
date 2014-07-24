@@ -3,7 +3,7 @@
 development:
   adapter: postgresql
   encoding: unicode
-  database: beyondz-platform_development
+  database: beyondz-playground_dev
   pool: 5
   username: <%= ENV['DATABASE_USERNAME'] %>
   password: <%= ENV['DATABASE_PASSWORD'] %>
@@ -11,7 +11,7 @@ development:
 test:
   adapter: postgresql
   encoding: unicode
-  database: beyondz-platform_test
+  database: beyondz-playground_test
   pool: 5
   username: <%= ENV['DATABASE_USERNAME'] %>
   password: <%= ENV['DATABASE_PASSWORD'] %>

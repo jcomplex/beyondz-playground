@@ -1,16 +1,30 @@
-This is where Beyond Z participants login and access their leadership development portal.
+This is where Beyond Z participants signup for, apply to, and login to access their leadership development portal.
 
 
 # Getting Started
 
+Make sure you have Ruby 2.1.1 and Rails 4.0 installed and configured.  You can
+check by running:
+ 
+    ruby -v 
 
-Follow this tutorial to get Rails setup for Heroku:
-https://devcenter.heroku.com/articles/getting-started-with-rails4
+and
+
+    rails -v
+
+If you don't, the "Installing Rails" section of this guide is a good
+start (or please link to a better tutorial in this readme once you find
+one :)
+http://guides.rubyonrails.org/getting_started.html
 
 You must install Postgres (http://postgresapp.com/)
-and set your PATH in your ~/.bashrc:
+and set your PATH in your ~/.bashrc  For example:
 
 	export PATH="/Applications/Postgres93.app/Contents/MacOS/bin:$PATH"
+
+and also create a user for the BZ application:
+
+    createuser -s beyondz-playground
 
 After your environment is setup, fork this repository on Github. Then in the location you want the local copy, run:
 
@@ -22,21 +36,47 @@ To get all your gems, run:
 
 ## Configuration
 
-In the "/env.sample" file is a list of environment variables that must be set for your database, SMTP, etc... to function properly. Copy this file to ".env"  and be sure these values are set for your Rails environment using your Foreman, Pow or preferred server setup.
+We manage sensitive data through ENV variables that need to be set for
+the features that depend on those variables to work. By default, using
+the instructions above the app should come up without editing anything
+but certain features will be broken (like emailing).
 
-### Creating a new Secret Token
+One easy way to manage your ENV variables is using Foreman (or Pow).  If
+you install Foreman using:
 
-	rake secret
-	
-Take the results of the above command and put this in your ".env" file for RAILS\_SECRET\_TOKEN.
+    gem install foreman
+
+Then you can setup your ENV variables by copying env.sample to .env and editing
+the values that you need.
+
+    cp env.sample .env
 
 ## Running the Application 
 From your repo directory:
 
 	rake db:create
 	rake db:migrate
+  rake db:seed
 
-And to start website on local machine, run: $foreman start and the app will be available at http://localhost:3000
+Finally, you can start your rails app using Foreman (which reads .env)
+using:
+
+    foreman start
+
+The app will be available at http://localhost:5000 (or whatever port you
+configured it to run on)
+
+## Testing
+We have created a few test users that you can login to the platform with.  They are populated using the rake db:seed task.
+
+    username: test+student1@beyondz.org
+    password: test
+
+    username: test+coach1@beyondz.org
+    password: test
+
+    username: test+admin@beyondz.org
+    password: test
 
 ## Code Management
 
@@ -47,7 +87,7 @@ http://nathanhoad.net/git-workflow-forks-remotes-and-pull-requests
 ### Setup
 To move on with development, run:
 
-	git remote add upstream https://github.com/beyond-z/beyondz-platform.git
+	git remote add upstream https://github.com/beyond-z/beyondz-playgroud.git
 	
 	
 This makes the upstream (original repo) code available for merging into your local fork.
@@ -83,10 +123,6 @@ On the next screen, click "Edit" near the right-hand side of the screen.
 
 ![Edit location](docs/edit-branch.png)
 
-Then choose the 'staging' branch of the beyondz-platform. 
-
-![Switch to staging](docs/staging-pull.png)
-
 Write a meaningful title and summary so it is well documented what this "feature" 
 is when looking back or at a glance.  Your pull request will be rejected if the 
 title and  summary is cryptic for other readers.
@@ -96,13 +132,13 @@ Once the pull is merged, do some cleanup on your local branch:
 * Stay up to date by merging the staging repository back to your
 local branch.
 ```
-	git pull upstream staging
+	git pull upstream master
 ```
 
-* Switch back to staging (or some other branch) and delete the feature
+* Switch back to master (or some other branch) and delete the feature
 branch (locally and remotely)
 ```
-  git checkout staging
+  git checkout master
   git branch -d <feature_name>
   git push origin :<feature_name>
 ```
@@ -114,7 +150,8 @@ on GitHub in the form of a checkbox or an X mark.
 
 The current integration runs the test suite as well as rubocop. Any errors resulting from either will show as a failure.
 
-You can see the details here: https://travis-ci.org/beyond-z/beyondz-platform
+You can see the details here:
+https://travis-ci.org/beyond-z/beyondz-playground
 
 # Coding Conventions
 
