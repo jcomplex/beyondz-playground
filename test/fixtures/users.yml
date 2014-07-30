@@ -1,1 +1,6 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+tester:
+  first_name: "Test"
+  last_name: "User"
+  email: "test.user@gmail.com"
+  profile_name: "Test User"
