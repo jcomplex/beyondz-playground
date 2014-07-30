@@ -1,4 +1,6 @@
 BeyondzPlatform::Application.routes.draw do
+  get 'profiles/show'
+
   devise_for :users, controllers: { confirmations: 'confirmations' }
 
   root "home#index"
