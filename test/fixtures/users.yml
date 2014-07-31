@@ -3,4 +3,5 @@ tester:
   first_name: "Test"
   last_name: "User"
   email: "test.user@gmail.com"
-  profile_name: "Test User"
+  password: "test"
+  

@@ -11,4 +11,9 @@ class ProfilesControllerTest < ActionController::TestCase
     get :show, id: "doesn't exist"
     assert_response :not_found
   end
+  
+  test "should get user data when the profile page is successfully loaded" do
+    get :show, id: users(:tester).profile_name
+    assert assigns(:user)
+  end
 end
